@@ -14,7 +14,7 @@ module Ask
       # - When rate-limited, the API returns 429 Too Many Requests.
       # - The agent should wait for the Retry-After header and retry.
       RATE_LIMIT = {
-        description: "Sentry rate limits vary by plan. See https://docs.sentry.io/api/rate-limiting/",
+        description: "Sentry rate limits vary by plan. See https://docs.sentry.io/api/ratelimits/",
         error_status: 429,
         action: "Wait for the Retry-After header duration, then retry the request."
       }.freeze
