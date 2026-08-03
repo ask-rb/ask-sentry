@@ -15,7 +15,7 @@ class IntegrationTest < Minitest::Test
 
   def test_client_raises_invalid_credential_on_401
     Ask::Auth.configure do |config|
-      config.providers = [->(name, user: nil) { "sntrys_bad_token" if name == "sentry_token" }]
+      config.providers = [->(name, user: nil) { "sntrys_bad_token" if name.to_s == "sentry_token" }]
     end
 
     response = Faraday::Response.new(status: 401, body: '{"detail":"Invalid token"}')
@@ -26,7 +26,7 @@ class IntegrationTest < Minitest::Test
 
   def test_delegates_to_faraday
     Ask::Auth.configure do |config|
-      config.providers = [->(name, user: nil) { "sntrys_test" if name == "sentry_token" }]
+      config.providers = [->(name, user: nil) { "sntrys_test" if name.to_s == "sentry_token" }]
     end
 
     client = Ask::Sentry.client
@@ -39,7 +39,7 @@ class IntegrationTest < Minitest::Test
 
   def test_client_has_sentry_base_url
     Ask::Auth.configure do |config|
-      config.providers = [->(name, user: nil) { "sntrys_test" if name == "sentry_token" }]
+      config.providers = [->(name, user: nil) { "sntrys_test" if name.to_s == "sentry_token" }]
     end
 
     response = Faraday::Response.new(status: 200, body: "[]")

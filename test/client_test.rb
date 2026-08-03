@@ -10,7 +10,7 @@ class ClientTest < Minitest::Test
   def test_client_returns_faraday_connection_when_token_available
     token = "sntrys_test_token_12345"
     Ask::Auth.configure do |config|
-      config.providers = [->(name, user: nil) { token if name == "sentry_token" }]
+      config.providers = [->(name, user: nil) { token if name.to_s == "sentry_token" }]
     end
 
     client = Ask::Sentry.client
@@ -20,7 +20,7 @@ class ClientTest < Minitest::Test
   def test_client_uses_sentry_base_url
     token = "sntrys_test_token"
     Ask::Auth.configure do |config|
-      config.providers = [->(name, user: nil) { token if name == "sentry_token" }]
+      config.providers = [->(name, user: nil) { token if name.to_s == "sentry_token" }]
     end
 
     Faraday::Connection.any_instance.stubs(:get).returns(
@@ -43,7 +43,7 @@ class ClientTest < Minitest::Test
   def test_client_raises_invalid_credential_on_401
     token = "bad_token"
     Ask::Auth.configure do |config|
-      config.providers = [->(name, user: nil) { token if name == "sentry_token" }]
+      config.providers = [->(name, user: nil) { token if name.to_s == "sentry_token" }]
     end
 
     response = Faraday::Response.new(status: 401, body: '{"detail":"Invalid token"}')
@@ -55,7 +55,7 @@ class ClientTest < Minitest::Test
   def test_recent_errors_returns_response
     token = "sntrys_valid_token"
     Ask::Auth.configure do |config|
-      config.providers = [->(name, user: nil) { token if name == "sentry_token" }]
+      config.providers = [->(name, user: nil) { token if name.to_s == "sentry_token" }]
     end
 
     response = Faraday::Response.new(status: 200, body: '[{"id":"1","title":"Error"}]')
@@ -68,7 +68,7 @@ class ClientTest < Minitest::Test
   def test_issue_events_returns_response
     token = "sntrys_valid_token"
     Ask::Auth.configure do |config|
-      config.providers = [->(name, user: nil) { token if name == "sentry_token" }]
+      config.providers = [->(name, user: nil) { token if name.to_s == "sentry_token" }]
     end
 
     response = Faraday::Response.new(status: 200, body: '[{"id":"1"}]')
@@ -81,7 +81,7 @@ class ClientTest < Minitest::Test
   def test_client_passes_through_successful_response
     token = "sntrys_valid_token"
     Ask::Auth.configure do |config|
-      config.providers = [->(name, user: nil) { token if name == "sentry_token" }]
+      config.providers = [->(name, user: nil) { token if name.to_s == "sentry_token" }]
     end
 
     response = Faraday::Response.new(status: 200, body: '{"id":"test"}')
@@ -94,7 +94,7 @@ class ClientTest < Minitest::Test
   def test_client_allows_other_http_methods
     token = "sntrys_valid_token"
     Ask::Auth.configure do |config|
-      config.providers = [->(name, user: nil) { token if name == "sentry_token" }]
+      config.providers = [->(name, user: nil) { token if name.to_s == "sentry_token" }]
     end
 
     response = Faraday::Response.new(status: 200, body: "{}")
