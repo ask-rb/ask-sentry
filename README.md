@@ -3,9 +3,8 @@
 [![Gem Version](https://badge.fury.io/rb/ask-sentry.svg)](https://badge.fury.io/rb/ask-sentry)
 
 > **⚠️ DEPRECATED:** This gem is deprecated. Use Sentry's official MCP server
-> instead: https://mcp.sentry.dev/. Existing gem installations may continue to
-> work, but this repository will receive no further feature development. See
-> the official MCP source for setup and capabilities.
+> instead. Existing gem installations may continue to work, but this
+> repository will receive no further feature development.
 
 Sentry service context for AI agents in the ask-rb ecosystem. It provides an
 authenticated HTTP client for the Sentry REST API, metadata constants for
