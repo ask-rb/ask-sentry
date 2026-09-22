@@ -1,3 +1,11 @@
+## Deprecated - 2026-09-22
+
+### Deprecated
+
+- The `ask-sentry` gem is deprecated. Use Sentry's official MCP server
+  instead: https://mcp.sentry.dev/. Existing gem installations may continue to
+  work, but this repository will receive no further feature development.
+
 ## [0.1.5] - 2026-09-18
 
 ### Changed
